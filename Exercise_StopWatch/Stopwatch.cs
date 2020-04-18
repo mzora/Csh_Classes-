@@ -7,27 +7,44 @@ using System.Threading.Tasks;
 namespace Exercise_StopWatch
 {
     class Stopwatch
-    {//public TimeSpan Duration { get; set; }
+    {
+        private DateTime _start;
+        private DateTime _stop;
+        private bool _chronoIsOn;
 
-        public DateTime Start()
+        public void Start()
         {
-            DateTime timeStart = DateTime.Now;
-            return timeStart;
+            if (!_chronoIsOn)
+            {
+                _chronoIsOn = true;
+                _start = DateTime.Now;
+                Console.WriteLine("chrono start");
+            }
+            else if (_chronoIsOn)
+            {
+                Console.WriteLine("isn't possible to start twice");
+            }
         }
 
-        public DateTime Stop()
+        public void Stop()
         {
-            DateTime timeStop = DateTime.Now;
-            return timeStop;
+            if (_chronoIsOn)
+            {
+                _stop = DateTime.Now;
+                _chronoIsOn = false;
+                Console.WriteLine("chrono stop");
+            }
+            else
+            {
+                Console.WriteLine("start chrono firts!");
+            }
         }
 
-        public TimeSpan DurationCalc(DateTime start, DateTime stop)
+        public TimeSpan Calc()
         {
-
-            TimeSpan duration = stop - start;
-            //Duration = duration;
-            return duration;
+            return (_stop - _start);
         }
+
     }
 }
 
