@@ -37,14 +37,12 @@ namespace Exercise_StackOverflowPost
     {
         static void Main(string[] args)
         {
+            bool gameOn = true;
 
-            Console.WriteLine("Tap 'y' to create a new Post");
-            
-            string createPost = Console.ReadLine();
             var postsList = new List<Post>();
             int id = 1;
 
-            while (createPost.ToLower() == "y")
+            while (gameOn)
             {
                 Console.WriteLine("Type the title: ");
                 string postTitle = Console.ReadLine();
@@ -53,11 +51,11 @@ namespace Exercise_StackOverflowPost
                 string postDescr = Console.ReadLine();
 
                 postsList.Add(new Post(id, postTitle, postDescr));
-                
                 id += 1;
                 
-                Console.WriteLine("Tap 'y' to create another post or 'n': ");
-                createPost = Console.ReadLine();
+                Console.WriteLine("'Enter' to other Post or 'n' to next section");
+                if (Console.ReadLine() == "n")
+                    gameOn = false;
             }
 
             Console.WriteLine("The following are your posts: ");
@@ -67,11 +65,11 @@ namespace Exercise_StackOverflowPost
                 Console.WriteLine(postsList[i].Getid() + " " + postsList[i].GetTitle());
             }
 
-            bool gameOn = true;
             
+            gameOn = true;
             while (gameOn)
             {
-                Console.Write("Please up or down vote posts typing the post number and '+' or '-'" + "or hit enter finish: ");
+                Console.Write("Type post number and '+' or '-'" + "or hit enter finish: ");
                 var inputVotes = Console.ReadLine();
 
                 char[] PostAndVotes = inputVotes.ToCharArray();
@@ -92,7 +90,7 @@ namespace Exercise_StackOverflowPost
                         }
                         else
                         {
-                            Console.WriteLine("That was not a valid entry");
+                            Console.WriteLine("Not a valid entry");
                         }
                     }                   
                 }
